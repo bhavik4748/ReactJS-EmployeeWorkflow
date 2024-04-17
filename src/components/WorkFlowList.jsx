@@ -13,7 +13,15 @@ function WorkFlowList() {
     const [colDefs, setColDefs] = useState([
         { field: 'id', headerName: 'Workflow Id', width: 120 },
         { field: 'stateId', headerName: 'State' },
-        { field: 'state.stateName', headerName: 'State Name' },
+        {
+            field: 'state.stateName',
+            headerName: 'State Name',
+            editable: true,
+            cellEditor: 'agSelectCellEditor',
+            cellEditorParams: {
+                values: ['Verified', 'Not Verified', '(other)'],
+            },
+        },
         { field: 'employeeId', headerName: 'Employee Id' },
         { field: 'employee.name', headerName: 'Employee Name' },
         {
@@ -36,12 +44,45 @@ function WorkFlowList() {
         };
         // Call the function
         fetchData();
-    }, [])
+    }, []);
+
+    const updateName = async (event) => {
+        console.log({ event });
+
+        if (event.oldValue !== event.newValue) {
+            switch (event.newValue) {
+                case 'Verified':
+                    event.data.stateId = 2;
+
+                    // update current request
+                    await APIObj.updateWorkFlowById(event.data.id, event.data);
+
+
+                    // create new request with updated state
+                    event.data.stateId = 1;
+                    event.data.id = 0;
+                    const result = await APIObj.addWorkFlowById(event.data);
+                    setRowData(result);
+
+            }
+        }
+
+        // const result = await APIObj.updateEmployee(event.data);
+        // setRowData(result);
+    }
+
+    const refreshGrid = async () => {
+        const result = await APIObj.getAllWorkFlows();
+        setRowData(result);
+    }
 
     return (
         // wrapping container with theme & size
         <div className='center-flex'>
             <h1 className='center'>WorkFlow List </h1>
+            <div className='right'>
+                <button onClick={refreshGrid}> Refresh Grid</button>
+            </div>
             <div
                 className="ag-theme-quartz " // applying the grid theme
                 style={{ height: 500, width: 1200 }} // the grid will fill the size of the parent container
@@ -50,7 +91,7 @@ function WorkFlowList() {
                 <AgGridReact
                     rowData={rowData}
                     columnDefs={colDefs}
-
+                    onCellValueChanged={updateName}
                 />
             </div>
         </div>

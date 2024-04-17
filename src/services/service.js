@@ -57,6 +57,37 @@ class API {
         }
     }
 
+    async updateWorkFlowById(id, workflow){
+        const requestOptions = {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(workflow)
+        };
+        try{
+            const res = await fetch(`${this.url}WorkFlows/${id}`, requestOptions); // Replace with your API endpoint
+          
+
+        }catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
+    async addWorkFlowById(workflow){
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(workflow)
+        };
+        try{
+            const res = await fetch(`${this.url}WorkFlows`, requestOptions); // Replace with your API endpoint
+            const result = await res.json();
+            return result;
+
+        }catch (error) {
+            console.error('Error fetching data:', error);
+        }
+    }
+
 
 }
 

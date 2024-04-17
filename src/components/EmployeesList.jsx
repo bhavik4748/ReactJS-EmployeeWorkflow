@@ -42,7 +42,7 @@ function EmployeesList() {
     // wrapping container with theme & size
     <div className='center-flex'>
        <h1 className='center'>Employee List </h1>
-        <div className='right'>
+        <div className='rightAddEmployee'>
           <button onClick={addEmployee}>+ Add Employee</button>
         </div>
       <div

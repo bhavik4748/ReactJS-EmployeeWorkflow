@@ -4,7 +4,7 @@
   align-items: center; 
   }
 
-  .right{
+  .rightAddEmployee{
     display: flex;
     justify-content: right;
     width: 500px;
