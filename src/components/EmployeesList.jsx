@@ -10,7 +10,7 @@ function EmployeesList() {
 
   // Column Definitions: Defines the columns to be displayed.
   const [colDefs, setColDefs] = useState([
-    { field: 'id', headerName: 'Employee Id', editable: false },
+    { field: 'employeeId', headerName: 'Employee Id', editable: false },
     { field: 'name', headerName: 'Employee Name' },
   ]);
 

@@ -57,14 +57,14 @@ class API {
         }
     }
 
-    async updateWorkFlowById(id, workflow){
+    async updateWorkFlowById(workFlowId, workflow){
         const requestOptions = {
             method: 'PUT',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(workflow)
         };
         try{
-            const res = await fetch(`${this.url}WorkFlows/${id}`, requestOptions); // Replace with your API endpoint
+            const res = await fetch(`${this.url}WorkFlows/${workFlowId}`, requestOptions); // Replace with your API endpoint
           
 
         }catch (error) {
