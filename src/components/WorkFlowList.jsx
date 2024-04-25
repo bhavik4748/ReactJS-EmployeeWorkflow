@@ -9,7 +9,7 @@ import { APIObj } from '../services/service';
 function WorkFlowList() {
     const [rowData, setRowData] = useState([]);
 
-    const Verify = async (workflowData) => {      
+    const Verify = async (workflowData) => {
         await APIObj.updateWorkFlowById(workflowData.workFlowId, workflowData);
         // create new request with updated state
         workflowData.stateId = 2;
@@ -21,8 +21,8 @@ function WorkFlowList() {
     // Column Definitions: Defines the columns to be displayed.
     const [colDefs, setColDefs] = useState([
         {
-            field: 'action', 
-            headerName: 'Action',          
+            field: 'action',
+            headerName: 'Action',
             cellRendererSelector: (params) => {
                 const actionComponent = {
                     component: ActionRenderer,
@@ -35,7 +35,7 @@ function WorkFlowList() {
         { field: 'stateId', headerName: 'State', width: 70 },
         {
             field: 'state.stateName',
-            headerName: 'State Name',         
+            headerName: 'State Name',
         },
         { field: 'employeeId', headerName: 'Employee Id', width: 120 },
         { field: 'employee.name', headerName: 'Employee Name' },
@@ -61,8 +61,6 @@ function WorkFlowList() {
         fetchData();
     }, []);
 
-   
-
     const refreshGrid = async () => {
         const result = await APIObj.getAllWorkFlows();
         setRowData(result);
@@ -70,19 +68,19 @@ function WorkFlowList() {
 
     return (
         // wrapping container with theme & size
-        <div className='center-flex'>
+        <div className='center-flex top-padding-50'>
             <h1 className='center'>WorkFlow List </h1>
             <div className='right'>
                 <button onClick={refreshGrid}> Refresh Grid</button>
             </div>
             <div
                 className="ag-theme-quartz " // applying the grid theme
-                style={{ height: 500, width: 1200 }} // the grid will fill the size of the parent container
+                style={{ height: 500, width: 1400 }} // the grid will fill the size of the parent container
             >
 
                 <AgGridReact
                     rowData={rowData}
-                    columnDefs={colDefs}                   
+                    columnDefs={colDefs}
                 />
             </div>
         </div>

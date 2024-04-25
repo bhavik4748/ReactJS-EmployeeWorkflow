@@ -5,12 +5,11 @@ import viteLogo from '/vite.svg';
 import './App.css';
 
 function App() {
-  
   return (
     // wrapping container with theme & size
     <div>
       <EmployeesList />
-      <WorkFlowList/>
+      <WorkFlowList />
     </div>
   );
 }
